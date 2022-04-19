@@ -36,4 +36,5 @@
       apt:
         autoremove: yes
         purge: yes
+      changed_when: false
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
