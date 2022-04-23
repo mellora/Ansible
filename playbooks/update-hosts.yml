@@ -5,7 +5,7 @@
   pre_tasks:
     - name: pre-run | update package index (Debian Based)
       tags: always, update, apt
-      apt: 
+      apt:
         update_cache: yes
       changed_when: false
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
@@ -17,7 +17,7 @@
     - name: run | update system packages (Debian Based)
       tags: always, update, apt
       apt:
-        upgrade: safe
+        upgrade: dist
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
 - hosts: all
@@ -30,7 +30,7 @@
         autoclean: yes
       changed_when: false
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
-    
+
     - name: post-run | autoremove orphan packages (Debian Based)
       tags: always, update, apt
       apt:
