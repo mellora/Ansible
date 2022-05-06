@@ -13,11 +13,12 @@ all:
         rpi-02.mellor-house.us:
         rpi-03.mellor-house.us:
         rpi-04.mellor-house.us:
-    ansible:
-      hosts:
-        ansible.mellor-house.us:
     kubernetes:
       hosts:
         rancher.mellor-house.us:
       children:
         rpi:
+    ansible:
+      hosts:
+        ansible.mellor-house.us:
+          ansible_connection: local
