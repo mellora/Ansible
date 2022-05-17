@@ -1,9 +1,0 @@
-all:
-  vars:
-    ansible_ssh_user: miwwge
-  children:
-    testers:
-      hosts:
-        test-01.mellor-house.us:
-        test-02.mellor-house.us:
-        test-03.mellor-house.us:
