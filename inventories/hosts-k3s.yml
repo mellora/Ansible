@@ -1,0 +1,16 @@
+all:
+  children:
+    masters:
+      hosts:
+        rancher.mellor-house.us:
+        rpi-01.mellor-house.us:
+    nodes:
+      hosts:
+        rpi-02.mellor-house.us:
+        rpi-03.mellor-house.us:
+        rpi-04.mellor-house.us:
+        k3s-node.mellor-house.us:
+    k3s_cluster:
+      children:
+        masters:
+        workers:

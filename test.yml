@@ -1,0 +1,12 @@
+---
+- hosts: k3s_cluster
+  gather_facts: yes
+  become: yes
+  tasks:
+    # - name: get default interface fact
+    #   debug:
+    #     msg: "{{ ansible_interfaces }}"
+
+    - name: get default interface fact
+      debug:
+        msg: "{{ ansible_default_ipv4.interface }}"

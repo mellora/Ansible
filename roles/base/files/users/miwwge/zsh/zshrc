@@ -1,0 +1,52 @@
+# Env
+export EDITOR=nano
+export TERM=xterm-256color
+
+# Show system information at login
+if [ -t 0 ]; then
+    if type -p "neofetch" > /dev/null; then
+        neofetch
+    else
+        echo "Warning: neofetch was called, but it's not installed."
+    fi
+fi
+
+# Prompt
+autoload -U colors && colors
+
+NEWLINE=$'\n'
+PROMPT="%B%F{cyan}%n%f%b@%F{magenta}%m%f%F{cyan}%d%f${NEWLINE}%F{10}>%f "
+
+# Aliases
+source $HOME/.zsh/aliasesrc
+
+# History
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.cache/zsh/history
+
+# Basic auto/tab complete
+autoload -U compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)   # Include Hidden Files
+
+# Tab Completion Mode Keys
+bindkey -M menuselect 'left' vi-backward-char
+bindkey -M menuselect 'down' vi-down-line-or-history
+bindkey -M menuselect 'up' vi-up-line-or-history
+bindkey -M menuselect 'right' vi-forward-char
+# Fix backspace bug when switching modes
+bindkey "^?" backward-delete-char
+
+# Spaceship settings
+source $HOME/.zsh/spaceshiprc
+
+# Plugins
+## Spaceship prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+## Zsh Syntax Highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

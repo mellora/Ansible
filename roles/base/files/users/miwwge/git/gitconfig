@@ -1,0 +1,9 @@
+[user]
+	email = AlexMellor2014@gmail.com
+	name = Alexander Mellor
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false

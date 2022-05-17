@@ -1,0 +1,48 @@
+---
+- hosts: minecraft
+  become: true
+  tasks:
+    - name: install | package requirements | (Debian Bases)
+      apt:
+        update_cache: yes
+        name:
+          - openjdk-8-jdk-headless
+          - openjdk-11-jdk-headless
+          - openjdk-17-jdk-headless
+          - unzip
+          - tmux
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- hosts: vault-hunters.mellor-house.us
+  vars:
+    pack_version: "1.12.4"
+    pack_checksum: "md5:28f2ff9011ec672c74eb09d4c4a1b150"
+    pack_url: "https://media.forgecdn.net/files/3621/294/VaultHunters-OfficialModpack-{{ pack_version }}-Server.zip"
+  become: true
+  tasks:
+    - name: Set Up Vault Hunters
+      block:
+        - name: Make sure directories exists
+          file:
+            path: /opt/{{ item }}
+            state: directory
+            owner: miwwge
+            group: miwwge
+            mode: 0775
+          loop:
+            - "minecraft"
+            - "minecraft/vault-hunters"
+
+        - name: Minecraft | Download | vault hunters server
+          get_url:
+            url: "{{pack_url}}"
+            dest: "/opt/minecraft/vault-hunters-{{ pack_version }}.zip"
+            checksum: "{{ checksum|default(omit) }}"
+
+        - name: Minecraft | Extract | vault hunters server
+          unarchive:
+            src: /opt/minecraft/vault-hunters.zip
+            dest: /opt/minecraft/vault-hunters
+            remote_src: yes
+            owner: miwwge
+            group: miwwge

@@ -1,0 +1,53 @@
+all:
+  vars:
+    ansible_ssh_user: miwwge
+
+    # Software Versions
+    k3s_version: v1.23.6+k3s1
+    ansible_user: "{{ ansible_ssh_user }}"
+    systemd_dir: /etc/systemd/system
+
+    # Timezone
+    system_timezone: "America/Chicago"
+
+    # apiserver_endpoint is virtual ip-address which will be configured on each master
+    apiserver_endpoint: "10.1.1.30"
+
+    # k3s_token is required  masters can talk together securely
+    # this token should be alpha numeric only
+    k3s_token: "Play1tl0ud"
+
+    # change these to your liking, the only required one is--no-deploy servicelb
+    # --no-deploy servicelb --no-deploy traefik
+    extra_server_args: "--no-deploy servicelb --no-deploy traefik"
+    extra_agent_args: ""
+
+    # image tag for kube-vip
+    kube_vip_tag_version: "v0.4.4"
+
+    # image tag for metal lb
+    metal_lb_speaker_tag_version: "v0.12.1"
+    metal_lb_controller_tag_version: "v0.12.1"
+
+    # metallb ip range for load balancer
+    metal_lb_ip_range: "10.1.1.31-10.1.1.60"
+
+  children:
+    testers:
+      hosts:
+        test-01.mellor-house.us:
+        test-02.mellor-house.us:
+        test-03.mellor-house.us:
+        test-04.mellor-house.us:
+    master:
+      hosts:
+        test-01.mellor-house.us:
+        test-02.mellor-house.us:
+    node:
+      hosts:
+        test-03.mellor-house.us:
+        test-04.mellor-house.us:
+    k3s_cluster:
+      children:
+        master:
+        node:
