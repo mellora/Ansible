@@ -4,9 +4,6 @@ all:
   children:
     hosts:
       miwwge-laptop.mellor-house.us:
-    minecraft:
-      hosts:
-        vault-hunters.mellor-house.us:
     rpi:
       hosts:
         rpi-01.mellor-house.us:
