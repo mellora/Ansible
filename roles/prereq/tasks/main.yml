@@ -49,10 +49,52 @@
 
 - name: Add /usr/local/bin to sudo secure_path
   lineinfile:
-    line: 'Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin'
+    line: "Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin"
     regexp: "Defaults(\\s)*secure_path(\\s)*="
     state: present
     insertafter: EOF
     path: /etc/sudoers
-    validate: 'visudo -cf %s'
+    validate: "visudo -cf %s"
   when: ansible_os_family == "RedHat"
+
+- name: Install Docker
+  block:
+    - name: Install Dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+    - name: Add GPG Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: add docker repository to apt
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+    - name: install docker
+      apt:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+    - name: Assert Docker is Enabled and Started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+  # handlers:
+  #   - name: restart docker
+  #     service:
+  #       name: docker
+  #       state: restarted
