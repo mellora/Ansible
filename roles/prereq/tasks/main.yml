@@ -92,6 +92,11 @@
         name: docker
         state: started
         enabled: yes
+    - name: Add user to Docker Group
+      user:
+        name: miwwge
+        groups: docker
+        append: yes
 
   # handlers:
   #   - name: restart docker

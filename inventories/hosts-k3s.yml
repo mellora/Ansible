@@ -49,3 +49,8 @@ all:
       children:
         master:
         node:
+
+    ansible:
+      hosts:
+        ansible.mellor-house.us:
+          ansible_connection: local

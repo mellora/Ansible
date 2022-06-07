@@ -16,3 +16,20 @@
   become: yes
   roles:
     - role: k3s/node
+
+- hosts: ansible
+  become: yes
+  tasks:
+    - name: Add Public Signing Key for helm
+      apt_key:
+        url: https://baltocdn.com/helm/signing.asc
+        state: present
+    - name: add Helm repository to apt
+      apt_repository:
+        repo: deb https://baltocdn.com/helm/stable/debian/ all main
+        state: present
+    - name: install Helm
+      apt:
+        name: helm
+        state: latest
+        update_cache: yes
