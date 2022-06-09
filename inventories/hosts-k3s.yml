@@ -36,12 +36,10 @@ all:
     master:
       hosts:
         rpi-01.mellor-house.us:
-        k3s-node.mellor-house.us:
-        rancher.mellor-house.us:
+        rpi-02.mellor-house.us:
 
     node:
       hosts:
-        rpi-02.mellor-house.us:
         rpi-03.mellor-house.us:
         rpi-04.mellor-house.us:
 
