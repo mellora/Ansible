@@ -1,15 +1,15 @@
 ---
 - hosts: all
-  environment:
-    HOST_KEY_CHECKING: "False"
-
-- hosts: all
-  tags: always, update, apt
+  gather_facts: yes
   become: true
   pre_tasks:
     - name: pre-run | update package index (Debian Based)
-      tags: always, update, aptblank
       apt:
         update_cache: yes
       changed_when: false
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+- hosts: all
+  become: true
+  roles:
+    - bootstrap

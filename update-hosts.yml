@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  tags: always, update, apt
   become: true
   pre_tasks:
     - name: pre-run | update package index (Debian Based)
@@ -11,7 +10,6 @@
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
 - hosts: all
-  tags: always, update, apt
   become: true
   tasks:
     - name: run | update system packages (Debian Based)
@@ -21,7 +19,6 @@
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
 - hosts: all
-  tags: always, update, apt
   become: true
   post_tasks:
     - name: post-run | cleanup package index (Debian Based)
