@@ -11,9 +11,6 @@ all:
         rpi-03.mellor-house.us:
         rpi-04.mellor-house.us:
     kubernetes:
-      hosts:
-        rancher.mellor-house.us:
-        k3s-node.mellor-house.us:
       children:
         rpi:
     ansible:
