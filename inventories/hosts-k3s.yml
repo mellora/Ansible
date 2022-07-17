@@ -1,7 +1,7 @@
 all:
   vars:
     # Software Versions
-    k3s_version: v1.23.6+k3s1
+    k3s_version: v1.24.2+k3s2
     ansible_user: miwwge
     systemd_dir: /etc/systemd/system
 
@@ -24,8 +24,8 @@ all:
     kube_vip_tag_version: "v0.4.4"
 
     # image tag for metal lb
-    metal_lb_speaker_tag_version: "v0.12.1"
-    metal_lb_controller_tag_version: "v0.12.1"
+    metal_lb_speaker_tag_version: "v0.13.3"
+    metal_lb_controller_tag_version: "v0.13.3"
 
     # metallb ip range for load balancer
     metal_lb_ip_range: "10.1.1.31-10.1.1.60"

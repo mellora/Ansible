@@ -1,19 +1,25 @@
 all:
   vars:
     ansible_ssh_user: miwwge
+  hosts:
+    miwwge-laptop.mellor-house.us:
+        hostname: miwwge-laptop
   children:
-    hosts:
-      miwwge-laptop.mellor-house.us:
     rpi:
       hosts:
         rpi-01.mellor-house.us:
+          hostname: rpi-01
         rpi-02.mellor-house.us:
+          hostname: rpi-02
         rpi-03.mellor-house.us:
+          hostname: rpi-03
         rpi-04.mellor-house.us:
+          hostname: rpi-04
     kubernetes:
       children:
         rpi:
     ansible:
       hosts:
         ansible.mellor-house.us:
+          hostname: ansible
           ansible_connection: local
