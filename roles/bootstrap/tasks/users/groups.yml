@@ -4,5 +4,4 @@
     state: present
   loop:
     - ansible
-    - hal9000
     - miwwge

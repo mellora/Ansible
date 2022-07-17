@@ -4,3 +4,15 @@
   - import_tasks: users/root.yml
   - import_tasks: users/groups.yml
   - import_tasks: users/miwwge.yml
+
+- name: set hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: set hosts file
+  template:
+    src: templates/hosts
+    dest: /etc/hosts
+    owner: root
+    group: adm
+    mode: '0644'

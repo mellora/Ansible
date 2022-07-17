@@ -16,3 +16,9 @@
     owner: root
     group: root
     mode: 0440
+
+- name: users | miwwge | add public key
+  authorized_key:
+    user: miwwge
+    state: present
+    key: https://github.com/mellora.keys
